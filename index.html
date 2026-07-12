@@ -1,0 +1,1850 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Góc Nhỏ Cà Phê — Ấm Cúng Từng Tách</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Design Tokens ── */
+    :root {
+      --color-primary:      #92400E;
+      --color-secondary:    #B45309;
+      --color-accent:       #D97706;
+      --color-bg:           #FEFBF3;
+      --color-bg-warm:      #FEF3C7;
+      --color-bg-dark:      #1C0F05;
+      --color-text:         #3B1F0A;
+      --color-text-muted:   #78350F;
+      --color-cream:        #F5ECD7;
+      --color-border:       #E6D5B0;
+      --color-surface:      #FFFBF0;
+
+      --font-heading: 'Amatic SC', cursive;
+      --font-body:    'Cabin', sans-serif;
+      --font-serif:   'Lora', serif;
+
+      --space-1:  4px;
+      --space-2:  8px;
+      --space-3:  12px;
+      --space-4:  16px;
+      --space-5:  24px;
+      --space-6:  32px;
+      --space-7:  48px;
+      --space-8:  64px;
+      --space-9:  96px;
+      --space-10: 128px;
+
+      --radius-sm: 4px;
+      --radius-md: 12px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 2px 8px rgba(92,40,14,0.08);
+      --shadow-md: 0 4px 20px rgba(92,40,14,0.14);
+      --shadow-lg: 0 8px 40px rgba(92,40,14,0.18);
+
+      --transition: 220ms ease;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { border: none; background: none; cursor: pointer; font-family: inherit; }
+
+    /* ── Utility ── */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-5);
+    }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+    .section-label {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-3);
+    }
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1.1;
+      margin-bottom: var(--space-4);
+    }
+    .section-subtitle {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      color: var(--color-text-muted);
+      max-width: 520px;
+      line-height: 1.75;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 14px 28px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+      cursor: pointer;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+    .btn-primary {
+      background: var(--color-primary);
+      color: #fff;
+      box-shadow: var(--shadow-md);
+    }
+    .btn-primary:hover {
+      background: var(--color-text);
+      box-shadow: var(--shadow-lg);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--color-primary);
+      border: 2px solid var(--color-primary);
+    }
+    .btn-outline:hover {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    /* ── Decorative SVG patterns ── */
+    .grain-overlay {
+      position: absolute; inset: 0; pointer-events: none; z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    /* ─────────────────────────────── */
+    /*  NAVIGATION                     */
+    /* ─────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: var(--space-4) 0;
+      transition: background var(--transition), box-shadow var(--transition);
+    }
+    .nav.scrolled {
+      background: rgba(255,251,240,0.95);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-sm);
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav__logo {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1;
+    }
+    .nav__logo span {
+      display: block;
+      font-size: 0.7rem;
+      font-family: var(--font-body);
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+      margin-top: 1px;
+    }
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-7);
+    }
+    .nav__link {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--color-text);
+      position: relative;
+      transition: color var(--transition);
+    }
+    .nav__link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 2px;
+      background: var(--color-accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition);
+      border-radius: 1px;
+    }
+    .nav__link:hover { color: var(--color-primary); }
+    .nav__link:hover::after { transform: scaleX(1); }
+    .nav__cta { padding: 10px 22px; font-size: 0.88rem; }
+    .nav__burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 8px;
+      cursor: pointer;
+    }
+    .nav__burger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--color-primary);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* ─────────────────────────────── */
+    /*  HERO                           */
+    /* ─────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--color-bg-warm);
+    }
+    /* Wooden texture via radial gradients */
+    .hero__bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 50%, #C6853A22 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 10% 80%, #92400E18 0%, transparent 50%),
+        linear-gradient(160deg, #FEF9EE 0%, #FEF3C7 40%, #FDE68A22 100%);
+    }
+    /* Decorative circle */
+    .hero__circle {
+      position: absolute;
+      right: -80px; top: 50%;
+      transform: translateY(-50%);
+      width: 620px; height: 620px;
+      background: radial-gradient(circle, #B4530920 0%, #92400E12 50%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero__dots {
+      position: absolute;
+      bottom: 60px; right: 80px;
+      opacity: 0.12;
+    }
+    .hero__content {
+      position: relative; z-index: 2;
+      padding: 120px 0 var(--space-10);
+      max-width: 640px;
+    }
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: rgba(146,64,14,0.08);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      padding: 6px 16px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+      margin-bottom: var(--space-5);
+    }
+    .hero__badge svg { flex-shrink: 0; }
+    .hero__title {
+      font-family: var(--font-heading);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1.05;
+      margin-bottom: var(--space-5);
+    }
+    .hero__title em {
+      font-style: italic;
+      color: var(--color-accent);
+      font-family: var(--font-heading);
+    }
+    .hero__desc {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--color-text-muted);
+      line-height: 1.8;
+      margin-bottom: var(--space-7);
+      max-width: 480px;
+    }
+    .hero__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+    .hero__stats {
+      display: flex;
+      gap: var(--space-7);
+      margin-top: var(--space-9);
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--color-border);
+    }
+    .hero__stat-num {
+      font-family: var(--font-heading);
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1;
+    }
+    .hero__stat-label {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      margin-top: 2px;
+    }
+    /* Coffee cup illustration */
+    .hero__illustration {
+      position: absolute;
+      right: 6%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 380px;
+      opacity: 0.9;
+      z-index: 2;
+    }
+
+    /* ─────────────────────────────── */
+    /*  ABOUT / STORY                  */
+    /* ─────────────────────────────── */
+    .about {
+      padding: var(--space-10) 0;
+      background: var(--color-surface);
+      position: relative;
+      overflow: hidden;
+    }
+    .about::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--color-accent), var(--color-primary), transparent);
+    }
+    .about__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-9);
+      align-items: center;
+    }
+    .about__visual {
+      position: relative;
+    }
+    .about__frame {
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, #B4530930 0%, #92400E20 50%, #D9770630 100%);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      border: 2px solid var(--color-border);
+    }
+    .about__frame-inner {
+      position: absolute; inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .about__badge-float {
+      position: absolute;
+      bottom: -20px; right: -20px;
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: var(--radius-md);
+      padding: var(--space-5);
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+    }
+    .about__badge-float .num {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .about__badge-float .txt {
+      font-size: 0.75rem;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
+    .about__quote {
+      margin: var(--space-6) 0;
+      padding-left: var(--space-5);
+      border-left: 3px solid var(--color-accent);
+    }
+    .about__quote p {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--color-text-muted);
+      line-height: 1.8;
+    }
+    .about__features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+      margin-top: var(--space-6);
+    }
+    .about__feature {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+    .about__feature-icon {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      border-radius: var(--radius-sm);
+      background: var(--color-bg-warm);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+      margin-top: 2px;
+    }
+    .about__feature-text strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 2px;
+    }
+    .about__feature-text span {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ─────────────────────────────── */
+    /*  MENU                           */
+    /* ─────────────────────────────── */
+    .menu {
+      padding: var(--space-10) 0;
+      background: var(--color-bg-warm);
+    }
+    .menu__header {
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+    .menu__tabs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-3);
+      margin-top: var(--space-5);
+      flex-wrap: wrap;
+    }
+    .menu__tab {
+      padding: 8px 20px;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1.5px solid var(--color-border);
+      color: var(--color-text-muted);
+      background: transparent;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .menu__tab:hover,
+    .menu__tab.active {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #fff;
+    }
+    .menu__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-5);
+    }
+    .menu-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .menu-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .menu-card__visual {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .menu-card__body {
+      padding: var(--space-5);
+    }
+    .menu-card__tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-2);
+    }
+    .menu-card__name {
+      font-family: var(--font-heading);
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: var(--space-2);
+      line-height: 1.2;
+    }
+    .menu-card__desc {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+    .menu-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-4) var(--space-5);
+      border-top: 1px solid var(--color-border);
+    }
+    .menu-card__price {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+    .menu-card__order {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition), transform var(--transition);
+      cursor: pointer;
+    }
+    .menu-card__order:hover {
+      background: var(--color-text);
+      transform: scale(1.1);
+    }
+
+    /* ─────────────────────────────── */
+    /*  ATMOSPHERE / FULL BANNER        */
+    /* ─────────────────────────────── */
+    .atmosphere {
+      padding: var(--space-10) 0;
+      background: var(--color-bg-dark);
+      position: relative;
+      overflow: hidden;
+    }
+    .atmosphere::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 20% 50%, rgba(180,83,9,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 80% at 80% 30%, rgba(146,64,14,0.18) 0%, transparent 60%);
+    }
+    .atmosphere__inner {
+      position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-9);
+      align-items: center;
+    }
+    .atmosphere__label { color: var(--color-accent); }
+    .atmosphere__title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: var(--space-5);
+    }
+    .atmosphere__title em {
+      font-style: italic;
+      color: var(--color-accent);
+    }
+    .atmosphere__desc {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.85;
+      margin-bottom: var(--space-6);
+    }
+    .atmosphere__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+    }
+    .atmosphere__item {
+      aspect-ratio: 1;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+    }
+    .atmosphere__item:first-child {
+      grid-column: span 2;
+      aspect-ratio: 16/9;
+    }
+    .atmosphere__item-inner {
+      position: absolute; inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.2);
+    }
+    .atmosphere__caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: var(--space-4);
+      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* ─────────────────────────────── */
+    /*  TESTIMONIALS                   */
+    /* ─────────────────────────────── */
+    .testimonials {
+      padding: var(--space-10) 0;
+      background: var(--color-surface);
+    }
+    .testimonials__header {
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+    .testimonials__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-5);
+    }
+    .testimonial-card {
+      background: var(--color-bg-warm);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 16px; left: 20px;
+      font-family: var(--font-heading);
+      font-size: 5rem;
+      color: var(--color-accent);
+      opacity: 0.25;
+      line-height: 1;
+    }
+    .testimonial-card__stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: var(--space-4);
+      color: var(--color-accent);
+    }
+    .testimonial-card__text {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--color-text);
+      line-height: 1.75;
+      margin-bottom: var(--space-5);
+    }
+    .testimonial-card__author {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .testimonial-card__avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      background: var(--color-primary);
+      flex-shrink: 0;
+    }
+    .testimonial-card__name {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .testimonial-card__role {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ─────────────────────────────── */
+    /*  VISIT / CONTACT                */
+    /* ─────────────────────────────── */
+    .visit {
+      padding: var(--space-10) 0;
+      background: var(--color-bg-warm);
+    }
+    .visit__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-9);
+      align-items: start;
+    }
+    .visit__info-block {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+    .visit__info-item {
+      display: flex;
+      gap: var(--space-4);
+      align-items: flex-start;
+    }
+    .visit__info-icon {
+      width: 48px; height: 48px;
+      flex-shrink: 0;
+      border-radius: var(--radius-sm);
+      background: rgba(146,64,14,0.1);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+    }
+    .visit__info-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--color-text);
+      margin-bottom: 4px;
+    }
+    .visit__info-text {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+    .visit__hours table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .visit__hours td {
+      padding: 6px 0;
+      color: var(--color-text-muted);
+    }
+    .visit__hours td:first-child { color: var(--color-text); font-weight: 500; }
+    .visit__hours td:last-child { text-align: right; }
+    .visit__hours tr:not(:last-child) td { border-bottom: 1px dashed var(--color-border); }
+    .visit__map {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      height: 380px;
+      border: 2px solid var(--color-border);
+      background: linear-gradient(135deg, #D4C5A2 0%, #C8B98C 50%, #B8A070 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .visit__map-placeholder {
+      text-align: center;
+      color: rgba(92,40,14,0.5);
+    }
+    .visit__map-placeholder svg { margin: 0 auto var(--space-3); }
+    .visit__map-placeholder p { font-size: 0.85rem; }
+
+    /* ─────────────────────────────── */
+    /*  CTA BANNER                     */
+    /* ─────────────────────────────── */
+    .cta-banner {
+      padding: var(--space-9) 0;
+      background: var(--color-primary);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 120% at 50% 50%, #B4530940 0%, transparent 70%);
+    }
+    .cta-banner__content { position: relative; z-index: 1; }
+    .cta-banner__title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: var(--space-4);
+    }
+    .cta-banner__sub {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: var(--space-6);
+    }
+    .btn-white {
+      background: #fff;
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+    .btn-white:hover {
+      background: var(--color-bg-warm);
+    }
+
+    /* ─────────────────────────────── */
+    /*  FOOTER                         */
+    /* ─────────────────────────────── */
+    .footer {
+      background: var(--color-bg-dark);
+      padding: var(--space-9) 0 var(--space-6);
+    }
+    .footer__inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--space-7);
+      padding-bottom: var(--space-7);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer__brand .nav__logo { color: var(--color-bg-warm); }
+    .footer__brand .nav__logo span { color: var(--color-accent); }
+    .footer__brand p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+      margin-top: var(--space-4);
+      max-width: 240px;
+    }
+    .footer__social {
+      display: flex;
+      gap: var(--space-3);
+      margin-top: var(--space-5);
+    }
+    .footer__social a {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.5);
+      transition: all var(--transition);
+    }
+    .footer__social a:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+    .footer__col-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: var(--space-5);
+    }
+    .footer__col ul { display: flex; flex-direction: column; gap: var(--space-3); }
+    .footer__col ul li a {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.55);
+      transition: color var(--transition);
+    }
+    .footer__col ul li a:hover { color: var(--color-accent); }
+    .footer__bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: var(--space-6);
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ─────────────────────────────── */
+    /*  SCROLL ANIMATIONS              */
+    /* ─────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .btn:hover { transform: none; }
+      .menu-card:hover { transform: none; }
+    }
+
+    /* ─────────────────────────────── */
+    /*  RESPONSIVE                     */
+    /* ─────────────────────────────── */
+    @media (max-width: 1024px) {
+      .hero__illustration { width: 280px; right: 2%; }
+      .footer__inner { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav__links { display: none; }
+      .nav__burger { display: flex; }
+      .nav__links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        inset: 0;
+        background: var(--color-surface);
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-7);
+        z-index: 99;
+      }
+      .nav__link { font-size: 1.5rem; }
+      .hero__illustration { display: none; }
+      .hero__stats { flex-wrap: wrap; gap: var(--space-5); }
+      .about__inner,
+      .atmosphere__inner,
+      .visit__inner { grid-template-columns: 1fr; }
+      .about__visual { order: -1; }
+      .about__badge-float { bottom: -10px; right: -10px; }
+      .testimonials__grid { grid-template-columns: 1fr; }
+      .footer__inner { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .menu__grid { grid-template-columns: 1fr; }
+      .atmosphere__grid { grid-template-columns: 1fr; }
+      .atmosphere__item:first-child { aspect-ratio: 4/3; }
+      .footer__inner { grid-template-columns: 1fr; }
+      .footer__bottom { flex-direction: column; gap: var(--space-3); text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── NAVIGATION ── -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Điều hướng chính">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="#" class="nav__logo" aria-label="Góc Nhỏ Cà Phê - Trang chủ">
+          Góc Nhỏ
+          <span>Cà Phê</span>
+        </a>
+
+        <ul class="nav__links" id="nav-links" role="list">
+          <li><a href="#menu" class="nav__link">Thực Đơn</a></li>
+          <li><a href="#about" class="nav__link">Câu Chuyện</a></li>
+          <li><a href="#atmosphere" class="nav__link">Không Gian</a></li>
+          <li><a href="#visit" class="nav__link">Địa Chỉ</a></li>
+          <li>
+            <a href="#visit" class="btn btn-primary nav__cta" aria-label="Liên hệ đặt bàn">
+              Đặt Bàn
+            </a>
+          </li>
+        </ul>
+
+        <button class="nav__burger" id="nav-burger" aria-label="Mở menu" aria-expanded="false" aria-controls="nav-links">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero" aria-label="Giới thiệu quán">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="hero__circle" aria-hidden="true"></div>
+
+    <!-- Dot pattern -->
+    <svg class="hero__dots" width="180" height="180" viewBox="0 0 180 180" aria-hidden="true">
+      <pattern id="dots" x="0" y="0" width="18" height="18" patternUnits="userSpaceOnUse">
+        <circle cx="3" cy="3" r="2" fill="#92400E"/>
+      </pattern>
+      <rect width="180" height="180" fill="url(#dots)"/>
+    </svg>
+
+    <div class="container">
+      <div class="hero__content">
+        <div class="hero__badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+          </svg>
+          Mở cửa từ 7:00 sáng — Thứ Hai đến Chủ Nhật
+        </div>
+
+        <h1 class="hero__title">
+          Nơi mỗi<br>
+          tách cà phê<br>
+          <em>kể một câu chuyện</em>
+        </h1>
+
+        <p class="hero__desc">
+          Góc nhỏ yên tĩnh giữa phố thị — nơi bạn có thể nhâm nhi
+          ly cà phê rang mộc thủ công, nghe tiếng mưa và thả trôi
+          những khoảnh khắc bình yên.
+        </p>
+
+        <div class="hero__actions">
+          <a href="#menu" class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M17 8h1a4 4 0 1 1 0 8h-1"/>
+              <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>
+              <line x1="6" x2="6" y1="2" y2="4"/>
+              <line x1="10" x2="10" y1="2" y2="4"/>
+              <line x1="14" x2="14" y1="2" y2="4"/>
+            </svg>
+            Xem Thực Đơn
+          </a>
+          <a href="#about" class="btn btn-outline">
+            Câu Chuyện Của Chúng Tôi
+          </a>
+        </div>
+
+        <div class="hero__stats" aria-label="Thông tin về quán">
+          <div>
+            <div class="hero__stat-num">8+</div>
+            <div class="hero__stat-label">Năm hoạt động</div>
+          </div>
+          <div>
+            <div class="hero__stat-num">40+</div>
+            <div class="hero__stat-label">Loại thức uống</div>
+          </div>
+          <div>
+            <div class="hero__stat-num">5000+</div>
+            <div class="hero__stat-label">Khách hàng thân thiết</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coffee cup SVG illustration -->
+    <div class="hero__illustration" aria-hidden="true">
+      <svg viewBox="0 0 400 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Saucer -->
+        <ellipse cx="200" cy="360" rx="130" ry="22" fill="#92400E" opacity="0.15"/>
+        <ellipse cx="200" cy="354" rx="120" ry="18" fill="#B45309" opacity="0.2"/>
+        <path d="M80 350 Q200 368 320 350 Q310 370 200 376 Q90 370 80 350Z" fill="#C6853A" opacity="0.4"/>
+
+        <!-- Cup body -->
+        <path d="M110 200 L90 330 Q90 345 200 348 Q310 345 310 330 L290 200Z" fill="#92400E"/>
+        <path d="M110 200 L90 330 Q90 345 200 348 Q310 345 310 330 L290 200Z" fill="url(#cupGrad)"/>
+
+        <!-- Cup rim -->
+        <ellipse cx="200" cy="200" rx="95" ry="20" fill="#B45309"/>
+        <ellipse cx="200" cy="198" rx="88" ry="16" fill="#D4833A"/>
+
+        <!-- Coffee surface -->
+        <ellipse cx="200" cy="218" rx="80" ry="14" fill="#4A2500"/>
+        <ellipse cx="200" cy="216" rx="74" ry="11" fill="#5C3118"/>
+
+        <!-- Latte art -->
+        <path d="M170 216 Q185 208 200 216 Q215 224 230 216" stroke="#D4A56A" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+        <path d="M180 220 Q193 213 206 220 Q219 227 232 220" stroke="#D4A56A" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <circle cx="200" cy="216" r="8" fill="#C8916A" opacity="0.3"/>
+
+        <!-- Handle -->
+        <path d="M305 240 Q345 240 345 275 Q345 310 305 310" stroke="#7B3A0A" stroke-width="18" fill="none" stroke-linecap="round"/>
+        <path d="M305 240 Q340 240 340 275 Q340 310 305 310" stroke="#A0540E" stroke-width="10" fill="none" stroke-linecap="round"/>
+
+        <!-- Steam wisps -->
+        <path d="M165 185 Q160 165 168 148 Q176 131 170 112" stroke="#C6853A" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.4"/>
+        <path d="M200 180 Q195 158 203 140 Q211 122 205 102" stroke="#C6853A" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <path d="M235 185 Q230 162 238 145 Q246 128 240 108" stroke="#C6853A" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.4"/>
+
+        <!-- Coffee beans decoration -->
+        <ellipse cx="140" cy="280" rx="12" ry="8" fill="#4A2500" opacity="0.15" transform="rotate(-30 140 280)"/>
+        <ellipse cx="265" cy="310" rx="10" ry="6" fill="#4A2500" opacity="0.12" transform="rotate(20 265 310)"/>
+
+        <!-- Highlight on cup -->
+        <path d="M130 210 Q125 260 128 310" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.12"/>
+
+        <defs>
+          <linearGradient id="cupGrad" x1="110" y1="200" x2="310" y2="348" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#B45309" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#92400E" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section class="about" id="about" aria-labelledby="about-title">
+    <div class="container">
+      <div class="about__inner">
+
+        <div class="about__visual">
+          <div class="about__frame">
+            <div class="about__frame-inner">
+              <!-- Illustrated scene -->
+              <svg viewBox="0 0 320 400" width="260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Hình minh hoạ không gian quán cà phê">
+                <!-- Window -->
+                <rect x="40" y="40" width="240" height="200" rx="8" fill="#C6853A" opacity="0.15"/>
+                <rect x="48" y="48" width="224" height="184" rx="4" fill="#FEF3C7" opacity="0.6"/>
+                <line x1="160" y1="48" x2="160" y2="232" stroke="#92400E" stroke-width="2" opacity="0.3"/>
+                <line x1="48" y1="140" x2="272" y2="140" stroke="#92400E" stroke-width="2" opacity="0.3"/>
+                <!-- Plant in window -->
+                <ellipse cx="80" cy="220" rx="18" ry="8" fill="#3D6B45" opacity="0.4"/>
+                <path d="M80 220 Q70 190 75 170 Q82 180 80 220" fill="#4A7A52" opacity="0.5"/>
+                <path d="M80 210 Q95 185 98 165 Q88 178 80 210" fill="#5A8A62" opacity="0.4"/>
+                <!-- Table -->
+                <rect x="60" y="290" width="200" height="12" rx="4" fill="#7B3A0A" opacity="0.4"/>
+                <rect x="80" y="302" width="8" height="60" rx="2" fill="#7B3A0A" opacity="0.3"/>
+                <rect x="232" y="302" width="8" height="60" rx="2" fill="#7B3A0A" opacity="0.3"/>
+                <!-- Cup on table -->
+                <ellipse cx="160" cy="290" rx="22" ry="5" fill="#92400E" opacity="0.2"/>
+                <path d="M142 265 L138 290 Q138 295 160 296 Q182 295 182 290 L178 265Z" fill="#92400E" opacity="0.6"/>
+                <ellipse cx="160" cy="265" rx="19" ry="4" fill="#B45309" opacity="0.7"/>
+                <ellipse cx="160" cy="266" rx="16" ry="3" fill="#3C1500"/>
+                <!-- Book -->
+                <rect x="90" y="278" width="40" height="12" rx="2" fill="#D4A843" opacity="0.6"/>
+                <line x1="110" y1="278" x2="110" y2="290" stroke="#92400E" stroke-width="1" opacity="0.3"/>
+                <!-- Warm glow -->
+                <radialGradient id="warmGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#D97706" stop-opacity="0.15"/>
+                  <stop offset="100%" stop-color="transparent"/>
+                </radialGradient>
+                <ellipse cx="160" cy="200" rx="150" ry="180" fill="url(#warmGlow)"/>
+              </svg>
+            </div>
+            <div class="about__badge-float">
+              <div class="num">8+</div>
+              <div class="txt">Năm<br>thành lập</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <span class="section-label">Câu chuyện của chúng tôi</span>
+          <h2 class="section-title" id="about-title">Bắt đầu từ một góc nhỏ yêu thích</h2>
+          <div class="about__quote">
+            <p>
+              "Chúng tôi tin rằng một tách cà phê ngon không chỉ là về hương vị —
+              đó là về khoảnh khắc bạn dành cho chính mình."
+            </p>
+          </div>
+          <p class="section-subtitle" style="margin-bottom: 1.5rem;">
+            Góc Nhỏ Cà Phê ra đời năm 2016 từ tình yêu với cà phê Việt
+            thuần túy và không gian ấm cúng. Mỗi hạt cà phê được chúng tôi
+            rang tay tỉ mỉ, mỗi góc nhỏ trong quán được sắp xếp để bạn cảm
+            thấy như đang ở nhà.
+          </p>
+          <p class="section-subtitle">
+            Chúng tôi chọn nguyên liệu từ các vườn cà phê ở Đà Lạt, Buôn
+            Ma Thuột — nơi những người nông dân tâm huyết trồng cà phê với
+            phương pháp truyền thống.
+          </p>
+
+          <div class="about__features">
+            <div class="about__feature">
+              <div class="about__feature-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+                </svg>
+              </div>
+              <div class="about__feature-text">
+                <strong>Rang tay thủ công</strong>
+                <span>Mỗi mẻ rang được kiểm soát thủ công</span>
+              </div>
+            </div>
+            <div class="about__feature">
+              <div class="about__feature-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              </div>
+              <div class="about__feature-text">
+                <strong>Nguyên liệu sạch</strong>
+                <span>Nguồn gốc rõ ràng từ vườn uy tín</span>
+              </div>
+            </div>
+            <div class="about__feature">
+              <div class="about__feature-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+              </div>
+              <div class="about__feature-text">
+                <strong>Không gian ấm cúng</strong>
+                <span>Thiết kế mộc mạc, ánh sáng nhẹ nhàng</span>
+              </div>
+            </div>
+            <div class="about__feature">
+              <div class="about__feature-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div class="about__feature-text">
+                <strong>Phục vụ tận tâm</strong>
+                <span>Barista được đào tạo chuyên nghiệp</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MENU ── -->
+  <section class="menu" id="menu" aria-labelledby="menu-title">
+    <div class="container">
+      <div class="menu__header">
+        <span class="section-label">Thực đơn</span>
+        <h2 class="section-title" id="menu-title">Những tách cà phê yêu thích</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">
+          Từ phin truyền thống đến espresso hiện đại — mỗi thức uống đều được pha chế tỉ mỉ.
+        </p>
+        <div class="menu__tabs" role="tablist" aria-label="Danh mục thực đơn">
+          <button class="menu__tab active" role="tab" aria-selected="true">Cà Phê</button>
+          <button class="menu__tab" role="tab" aria-selected="false">Trà & Thức Uống</button>
+          <button class="menu__tab" role="tab" aria-selected="false">Bánh Ngọt</button>
+        </div>
+      </div>
+
+      <div class="menu__grid">
+
+        <!-- Card 1 -->
+        <article class="menu-card reveal">
+          <div class="menu-card__visual" style="background: linear-gradient(135deg, #3C1500 0%, #7B3A0A 100%);">
+            <svg viewBox="0 0 120 100" width="80" aria-hidden="true">
+              <path d="M25 30 L22 75 Q22 80 60 81 Q98 80 98 75 L95 30Z" fill="#4A2500"/>
+              <ellipse cx="60" cy="30" rx="36" ry="8" fill="#5C3118"/>
+              <ellipse cx="60" cy="32" rx="30" ry="6" fill="#2A1200"/>
+              <path d="M96 45 Q112 45 112 58 Q112 71 96 71" stroke="#3C1500" stroke-width="6" fill="none"/>
+            </svg>
+          </div>
+          <div class="menu-card__body">
+            <span class="menu-card__tag">Đặc trưng</span>
+            <h3 class="menu-card__name">Cà Phê Phin Sữa</h3>
+            <p class="menu-card__desc">Cà phê Robusta rang đậm, nhỏ giọt qua phin truyền thống, thêm sữa đặc Ông Thọ.</p>
+          </div>
+          <div class="menu-card__footer">
+            <span class="menu-card__price">35.000₫</span>
+            <button class="menu-card__order" aria-label="Thêm Cà Phê Phin Sữa vào giỏ hàng">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="menu-card reveal reveal-delay-1">
+          <div class="menu-card__visual" style="background: linear-gradient(135deg, #92400E 0%, #C6853A 100%);">
+            <svg viewBox="0 0 120 100" width="80" aria-hidden="true">
+              <path d="M28 32 L25 75 Q25 80 60 81 Q95 80 95 75 L92 32Z" fill="rgba(255,255,255,0.2)"/>
+              <ellipse cx="60" cy="32" rx="34" ry="7" fill="rgba(255,255,255,0.3)"/>
+              <ellipse cx="60" cy="33" rx="28" ry="5" fill="#3C1500"/>
+              <!-- milk foam art -->
+              <path d="M48 33 Q54 28 60 33 Q66 38 72 33" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.6"/>
+              <circle cx="60" cy="33" r="5" fill="white" opacity="0.15"/>
+            </svg>
+          </div>
+          <div class="menu-card__body">
+            <span class="menu-card__tag">Bán chạy</span>
+            <h3 class="menu-card__name">Cappuccino</h3>
+            <p class="menu-card__desc">Espresso đậm đà, milk foam mịn mướt với nghệ thuật latte art theo phong cách Ý.</p>
+          </div>
+          <div class="menu-card__footer">
+            <span class="menu-card__price">55.000₫</span>
+            <button class="menu-card__order" aria-label="Thêm Cappuccino vào giỏ hàng">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="menu-card reveal reveal-delay-2">
+          <div class="menu-card__visual" style="background: linear-gradient(135deg, #1C4532 0%, #276749 100%);">
+            <svg viewBox="0 0 120 100" width="80" aria-hidden="true">
+              <!-- Glass -->
+              <path d="M35 20 L32 82 Q32 86 60 87 Q88 86 88 82 L85 20Z" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+              <!-- Ice cubes -->
+              <rect x="42" y="55" width="14" height="14" rx="3" fill="rgba(255,255,255,0.25)" transform="rotate(-10 42 55)"/>
+              <rect x="64" y="50" width="12" height="12" rx="3" fill="rgba(255,255,255,0.2)" transform="rotate(8 64 50)"/>
+              <!-- matcha -->
+              <path d="M35 20 L88 20 L88 40 Q60 48 35 40Z" fill="#276749" opacity="0.8"/>
+              <!-- straw -->
+              <rect x="72" y="10" width="5" height="75" rx="2.5" fill="#D4A843"/>
+            </svg>
+          </div>
+          <div class="menu-card__body">
+            <span class="menu-card__tag">Mới</span>
+            <h3 class="menu-card__name">Matcha Latte Đá</h3>
+            <p class="menu-card__desc">Matcha Nhật Bản grade premium, sữa tươi nguyên chất, đá viên mát lạnh.</p>
+          </div>
+          <div class="menu-card__footer">
+            <span class="menu-card__price">65.000₫</span>
+            <button class="menu-card__order" aria-label="Thêm Matcha Latte Đá vào giỏ hàng">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="menu-card reveal">
+          <div class="menu-card__visual" style="background: linear-gradient(135deg, #2D1B00 0%, #5C3118 100%);">
+            <svg viewBox="0 0 120 100" width="80" aria-hidden="true">
+              <!-- Moka pot -->
+              <path d="M50 75 L45 50 Q45 40 60 38 Q75 40 75 50 L70 75Z" fill="#7B3A0A"/>
+              <ellipse cx="60" cy="50" rx="18" ry="6" fill="#92400E"/>
+              <path d="M45 50 L40 40 Q38 35 42 35 L78 35 Q82 35 80 40 L75 50" fill="#5C3118"/>
+              <ellipse cx="60" cy="35" rx="18" ry="5" fill="#4A2500"/>
+              <path d="M60 38 L60 28 M55 30 Q60 22 65 30" stroke="#C6853A" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+            </svg>
+          </div>
+          <div class="menu-card__body">
+            <span class="menu-card__tag">Truyền thống</span>
+            <h3 class="menu-card__name">Cà Phê Đen Đá</h3>
+            <p class="menu-card__desc">Arabica Đà Lạt rang vừa, pha cold brew 12 tiếng, thanh và đậm đà.</p>
+          </div>
+          <div class="menu-card__footer">
+            <span class="menu-card__price">40.000₫</span>
+            <button class="menu-card__order" aria-label="Thêm Cà Phê Đen Đá vào giỏ hàng">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="menu-card reveal reveal-delay-1">
+          <div class="menu-card__visual" style="background: linear-gradient(135deg, #5C2400 0%, #A0470E 50%, #D4833A 100%);">
+            <svg viewBox="0 0 120 100" width="80" aria-hidden="true">
+              <!-- tall glass -->
+              <path d="M38 15 L34 84 Q34 88 60 89 Q86 88 86 84 L82 15Z" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+              <!-- layers -->
+              <path d="M38 15 L82 15 L82 35 Q60 40 38 35Z" fill="#F5C68A" opacity="0.8"/>
+              <path d="M35 62 L85 62 Q86 88 60 89 Q34 88 34 84 L35 62Z" fill="#5C2500" opacity="0.85"/>
+              <line x1="35" y1="62" x2="85" y2="62" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+              <!-- straw -->
+              <rect x="55" y="5" width="4" height="80" rx="2" fill="rgba(255,255,255,0.4)"/>
+            </svg>
+          </div>
+          <div class="menu-card__body">
+            <span class="menu-card__tag">Yêu thích</span>
+            <h3 class="menu-card__name">Bạc Xỉu</h3>
+            <p class="menu-card__desc">Cà phê nhạt kiểu Sài Gòn — ít đắng, nhiều sữa, hoàn hảo cho buổi sáng nhẹ nhàng.</p>
+          </div>
+          <div class="menu-card__footer">
+            <span class="menu-card__price">38.000₫</span>
+            <button class="menu-card__order" aria-label="Thêm Bạc Xỉu vào giỏ hàng">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="menu-card reveal reveal-delay-2">
+          <div class="menu-card__visual" style="background: linear-gradient(135deg, #3B1F0A 0%, #92400E 60%, #C6853A 100%);">
+            <svg viewBox="0 0 120 100" width="80" aria-hidden="true">
+              <!-- egg coffee cup -->
+              <path d="M28 35 L25 78 Q25 83 60 84 Q95 83 95 78 L92 35Z" fill="rgba(255,200,100,0.25)"/>
+              <ellipse cx="60" cy="35" rx="33" ry="8" fill="rgba(255,220,130,0.4)"/>
+              <!-- egg yolk foam -->
+              <ellipse cx="60" cy="38" rx="26" ry="10" fill="#F5C842" opacity="0.85"/>
+              <ellipse cx="60" cy="37" rx="18" ry="7" fill="#FFD966" opacity="0.9"/>
+              <ellipse cx="56" cy="35" rx="5" ry="3" fill="white" opacity="0.3"/>
+              <!-- coffee base visible at sides -->
+              <path d="M28 55 Q40 58 60 58 Q80 58 92 55 L92 78 Q92 83 60 84 Q28 83 28 78Z" fill="#3C1500" opacity="0.5"/>
+              <!-- spoon -->
+              <path d="M88 20 L82 45" stroke="#D4A843" stroke-width="3" stroke-linecap="round"/>
+              <ellipse cx="85" cy="18" rx="5" ry="4" fill="#D4A843"/>
+            </svg>
+          </div>
+          <div class="menu-card__body">
+            <span class="menu-card__tag">Đặc biệt Hà Nội</span>
+            <h3 class="menu-card__name">Cà Phê Trứng</h3>
+            <p class="menu-card__desc">Espresso đậm đà phủ lớp foam trứng đánh bông mịn, đặc sản Hà Nội chính hiệu.</p>
+          </div>
+          <div class="menu-card__footer">
+            <span class="menu-card__price">55.000₫</span>
+            <button class="menu-card__order" aria-label="Thêm Cà Phê Trứng vào giỏ hàng">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </button>
+          </div>
+        </article>
+
+      </div><!-- /menu__grid -->
+
+      <div style="text-align:center; margin-top: var(--space-8);">
+        <a href="#" class="btn btn-outline">Xem toàn bộ thực đơn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ATMOSPHERE ── -->
+  <section class="atmosphere" id="atmosphere" aria-labelledby="atmosphere-title">
+    <div class="container">
+      <div class="atmosphere__inner">
+        <div>
+          <span class="section-label atmosphere__label">Không gian</span>
+          <h2 class="atmosphere__title" id="atmosphere-title">
+            Một góc để<br>
+            <em>thở và nghĩ</em>
+          </h2>
+          <p class="atmosphere__desc">
+            Chúng tôi thiết kế Góc Nhỏ như một căn nhà thứ hai —
+            đèn vàng ấm áp, ghế gỗ cũ thân quen, tiếng nhạc jazz
+            nhẹ và mùi cà phê rang thoảng trong không khí.
+          </p>
+          <p class="atmosphere__desc">
+            Dù bạn đến một mình với cuốn sách, hay cùng bạn bè
+            trò chuyện — chúng tôi luôn có một góc riêng cho bạn.
+          </p>
+          <a href="#visit" class="btn btn-white" style="margin-top: var(--space-3);">
+            Tìm Đường Đến Quán
+          </a>
+        </div>
+
+        <div class="atmosphere__grid" aria-label="Ảnh không gian quán">
+          <!-- Photo placeholders with warm CSS art -->
+          <div class="atmosphere__item">
+            <div class="atmosphere__item-inner" style="background: linear-gradient(135deg, #7B3A0A 0%, #C6853A 50%, #D4A843 100%);">
+              <svg viewBox="0 0 320 180" width="100%" aria-hidden="true">
+                <!-- Interior scene: counter -->
+                <rect width="320" height="180" fill="url(#interiorGrad)"/>
+                <rect x="0" y="110" width="320" height="70" fill="#3C1500" opacity="0.5"/>
+                <!-- counter -->
+                <rect x="40" y="100" width="240" height="15" rx="2" fill="#5C3118"/>
+                <!-- shelves -->
+                <rect x="80" y="30" width="160" height="6" rx="2" fill="#4A2500" opacity="0.6"/>
+                <rect x="90" y="55" width="140" height="6" rx="2" fill="#4A2500" opacity="0.5"/>
+                <!-- jars on shelf -->
+                <rect x="100" y="16" width="16" height="14" rx="2" fill="#8B5E3C" opacity="0.8"/>
+                <rect x="125" y="12" width="20" height="18" rx="2" fill="#7B3A0A" opacity="0.8"/>
+                <rect x="155" y="18" width="14" height="12" rx="2" fill="#9C6A3A" opacity="0.8"/>
+                <!-- cups hanging -->
+                <circle cx="110" cy="42" r="4" fill="#92400E" opacity="0.6"/>
+                <circle cx="130" cy="40" r="4" fill="#7B3A0A" opacity="0.6"/>
+                <circle cx="150" cy="43" r="4" fill="#92400E" opacity="0.6"/>
+                <!-- warm light -->
+                <radialGradient id="interiorGrad" cx="50%" cy="30%" r="60%">
+                  <stop offset="0%" stop-color="#D4A843" stop-opacity="0.3"/>
+                  <stop offset="100%" stop-color="#3C1500" stop-opacity="0.4"/>
+                </radialGradient>
+                <defs>
+                  <radialGradient id="interiorGrad" cx="50%" cy="30%" r="60%">
+                    <stop offset="0%" stop-color="#D4A843" stop-opacity="0.25"/>
+                    <stop offset="100%" stop-color="transparent"/>
+                  </radialGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="atmosphere__caption">Quầy bar thủ công bằng gỗ cũ</div>
+          </div>
+
+          <div class="atmosphere__item">
+            <div class="atmosphere__item-inner" style="background: linear-gradient(160deg, #4A2500 0%, #8B5E3C 100%);">
+              <svg viewBox="0 0 160 160" width="100%" aria-hidden="true">
+                <!-- table nook scene -->
+                <rect x="20" y="90" width="120" height="8" rx="2" fill="#5C3118" opacity="0.7"/>
+                <rect x="30" y="98" width="6" height="50" rx="2" fill="#4A2500" opacity="0.5"/>
+                <rect x="124" y="98" width="6" height="50" rx="2" fill="#4A2500" opacity="0.5"/>
+                <!-- cup -->
+                <path d="M62 70 L59 90 Q59 93 80 93 Q101 93 101 90 L98 70Z" fill="#92400E" opacity="0.8"/>
+                <ellipse cx="80" cy="70" rx="19" ry="5" fill="#B45309" opacity="0.9"/>
+                <ellipse cx="80" cy="71" rx="15" ry="4" fill="#2A1000"/>
+                <!-- plant -->
+                <path d="M25 85 Q18 60 24 45 Q30 55 25 85" fill="#3D6B45" opacity="0.6"/>
+                <path d="M25 75 Q35 55 38 40 Q30 55 25 75" fill="#4A7A52" opacity="0.5"/>
+                <!-- window light -->
+                <rect x="100" y="10" width="50" height="70" rx="4" fill="#FEF3C7" opacity="0.15"/>
+                <line x1="125" y1="10" x2="125" y2="80" stroke="#D4A843" stroke-width="1" opacity="0.2"/>
+                <radialGradient id="tableLightGrad">
+                  <stop offset="0%" stop-color="#D4A843" stop-opacity="0.2"/>
+                  <stop offset="100%" stop-color="transparent"/>
+                </radialGradient>
+                <rect x="100" y="10" width="50" height="70" fill="url(#tableLightGrad)"/>
+              </svg>
+            </div>
+            <div class="atmosphere__caption">Góc nhỏ bên cửa sổ</div>
+          </div>
+
+          <div class="atmosphere__item">
+            <div class="atmosphere__item-inner" style="background: linear-gradient(135deg, #2D1000 0%, #7B3A0A 60%, #D4A843 100%);">
+              <svg viewBox="0 0 160 160" width="100%" aria-hidden="true">
+                <!-- barista hands / coffee making -->
+                <ellipse cx="80" cy="110" rx="50" ry="30" fill="#3C1500" opacity="0.4"/>
+                <!-- portafilter -->
+                <rect x="55" y="70" width="50" height="12" rx="6" fill="#5C3118"/>
+                <rect x="70" y="82" width="20" height="30" rx="4" fill="#4A2500"/>
+                <circle cx="80" cy="115" r="18" fill="#3C1500" opacity="0.7"/>
+                <!-- espresso drops -->
+                <path d="M74 112 Q73 125 74 130" stroke="#C6853A" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+                <path d="M80 112 Q79 127 80 133" stroke="#B45309" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+                <path d="M86 112 Q85 124 86 129" stroke="#C6853A" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+                <!-- machine -->
+                <rect x="30" y="50" width="100" height="40" rx="8" fill="#2A1200" opacity="0.6"/>
+                <rect x="38" y="58" width="44" height="24" rx="4" fill="#3C1500" opacity="0.7"/>
+                <circle cx="110" cy="65" r="8" fill="#4A2500" opacity="0.8"/>
+                <circle cx="110" cy="65" r="4" fill="#92400E" opacity="0.6"/>
+              </svg>
+            </div>
+            <div class="atmosphere__caption">Barista pha chế thủ công</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ── -->
+  <section class="testimonials" aria-labelledby="testimonials-title">
+    <div class="container">
+      <div class="testimonials__header">
+        <span class="section-label">Khách hàng nói gì</span>
+        <h2 class="section-title" id="testimonials-title">Những lời từ trái tim</h2>
+      </div>
+      <div class="testimonials__grid">
+
+        <article class="testimonial-card reveal">
+          <div class="testimonial-card__stars" aria-label="5 sao">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="testimonial-card__text">
+            "Mỗi sáng đi làm tôi đều ghé Góc Nhỏ. Ly cà phê trứng ở đây
+            ngon nhất Sài Gòn — không gian cũng thật sự ấm cúng và yên tĩnh."
+          </p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar" aria-hidden="true">L</div>
+            <div>
+              <div class="testimonial-card__name">Linh Nguyễn</div>
+              <div class="testimonial-card__role">Khách thân thiết • 3 năm</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card reveal reveal-delay-1">
+          <div class="testimonial-card__stars" aria-label="5 sao">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="testimonial-card__text">
+            "Lần đầu thử Cà Phê Phin ở đây, tôi mới hiểu tại sao người Việt
+            lại có thể ngồi cả buổi sáng bên một ly cà phê. Chậm rãi và thật tuyệt."
+          </p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar" aria-hidden="true" style="background: var(--color-secondary);">M</div>
+            <div>
+              <div class="testimonial-card__name">Minh Tuấn</div>
+              <div class="testimonial-card__role">Blogger ẩm thực</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card reveal reveal-delay-2">
+          <div class="testimonial-card__stars" aria-label="5 sao">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="testimonial-card__text">
+            "Nhờ Góc Nhỏ mà tôi mới biết Matcha Latte có thể ngon đến vậy.
+            Nhân viên thân thiện, không gian sạch sẽ. Sẽ còn quay lại nhiều lần nữa!"
+          </p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar" aria-hidden="true" style="background: #276749;">T</div>
+            <div>
+              <div class="testimonial-card__name">Thu Hương</div>
+              <div class="testimonial-card__role">Sinh viên</div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── VISIT ── -->
+  <section class="visit" id="visit" aria-labelledby="visit-title">
+    <div class="container">
+      <div style="margin-bottom: var(--space-8);">
+        <span class="section-label">Ghé thăm chúng tôi</span>
+        <h2 class="section-title" id="visit-title">Tìm đến Góc Nhỏ</h2>
+      </div>
+      <div class="visit__inner">
+        <div class="visit__info-block">
+          <div class="visit__info-item reveal">
+            <div class="visit__info-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div>
+              <div class="visit__info-title">Địa chỉ</div>
+              <div class="visit__info-text">123 Đường Nguyễn Trãi, Phường 7<br>Quận 5, TP. Hồ Chí Minh</div>
+            </div>
+          </div>
+
+          <div class="visit__info-item reveal reveal-delay-1">
+            <div class="visit__info-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div>
+              <div class="visit__info-title">Giờ mở cửa</div>
+              <div class="visit__hours">
+                <table aria-label="Bảng giờ mở cửa">
+                  <tbody>
+                    <tr><td>Thứ Hai — Thứ Sáu</td><td>7:00 — 22:00</td></tr>
+                    <tr><td>Thứ Bảy</td><td>7:00 — 23:00</td></tr>
+                    <tr><td>Chủ Nhật</td><td>8:00 — 21:00</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="visit__info-item reveal reveal-delay-2">
+            <div class="visit__info-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.29 6.29l1.14-1.14a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="visit__info-title">Liên hệ</div>
+              <div class="visit__info-text">
+                <a href="tel:+84901234567" style="color: var(--color-primary); font-weight: 500;">0901 234 567</a><br>
+                <a href="mailto:hello@gonhocafe.vn" style="color: var(--color-text-muted);">hello@gonhocafe.vn</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="visit__info-item reveal reveal-delay-3">
+            <div class="visit__info-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 2H3v16h5l3 3 3-3h7V2z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="visit__info-title">Đặt bàn trước</div>
+              <div class="visit__info-text">Nhắn tin qua Facebook hoặc gọi điện — chúng tôi luôn sẵn sàng đón bạn.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map placeholder -->
+        <div class="visit__map reveal" aria-label="Bản đồ vị trí quán cà phê">
+          <div style="position: absolute; inset: 0; background: linear-gradient(135deg, #D4C5A2 0%, #C8B98C 40%, #B8A070 70%, #A8906A 100%); opacity: 0.7;"></div>
+          <!-- Simple map illustration -->
+          <svg viewBox="0 0 400 380" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.4;" aria-hidden="true">
+            <!-- grid streets -->
+            <line x1="0" y1="95" x2="400" y2="95" stroke="#7B3A0A" stroke-width="6"/>
+            <line x1="0" y1="190" x2="400" y2="190" stroke="#7B3A0A" stroke-width="3"/>
+            <line x1="0" y1="280" x2="400" y2="280" stroke="#7B3A0A" stroke-width="3"/>
+            <line x1="100" y1="0" x2="100" y2="380" stroke="#7B3A0A" stroke-width="3"/>
+            <line x1="220" y1="0" x2="220" y2="380" stroke="#7B3A0A" stroke-width="6"/>
+            <line x1="320" y1="0" x2="320" y2="380" stroke="#7B3A0A" stroke-width="3"/>
+            <!-- blocks -->
+            <rect x="105" y="98" width="110" height="88" rx="4" fill="#92400E" opacity="0.3"/>
+            <rect x="225" y="98" width="90" height="88" rx="4" fill="#92400E" opacity="0.2"/>
+            <rect x="5" y="98" width="90" height="88" rx="4" fill="#92400E" opacity="0.2"/>
+            <rect x="105" y="194" width="110" height="82" rx="4" fill="#92400E" opacity="0.25"/>
+            <rect x="225" y="194" width="90" height="82" rx="4" fill="#92400E" opacity="0.2"/>
+          </svg>
+          <div class="visit__map-placeholder" style="position:relative;z-index:1;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#92400E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+            <p style="color: #92400E; font-weight: 600; margin-top: 8px;">123 Đường Nguyễn Trãi</p>
+            <p style="color: #78350F;">Quận 5, TP. HCM</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA BANNER ── -->
+  <section class="cta-banner" aria-label="Lời mời ghé thăm quán">
+    <div class="container">
+      <div class="cta-banner__content">
+        <h2 class="cta-banner__title">Hẹn gặp bạn tại Góc Nhỏ</h2>
+        <p class="cta-banner__sub">
+          Một tách cà phê ấm, một góc yên tĩnh — mọi thứ đều sẵn sàng chờ bạn.
+        </p>
+        <div style="display:flex; gap: var(--space-4); justify-content:center; flex-wrap:wrap;">
+          <a href="tel:+84901234567" class="btn btn-white">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.113.86.256 1.71.43 2.55"/>
+            </svg>
+            Gọi Đặt Bàn
+          </a>
+          <a href="#menu" class="btn btn-outline" style="border-color: rgba(255,255,255,0.4); color: #fff;">
+            Xem Thực Đơn
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <a href="#" class="nav__logo" aria-label="Góc Nhỏ Cà Phê - Về đầu trang">
+            Góc Nhỏ
+            <span>Cà Phê</span>
+          </a>
+          <p>
+            Một góc nhỏ ấm cúng giữa Sài Gòn — nơi mỗi tách cà phê được pha chế với tình yêu và sự tỉ mỉ.
+          </p>
+          <div class="footer__social" aria-label="Mạng xã hội">
+            <a href="#" aria-label="Facebook">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="TikTok">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.97a8.17 8.17 0 0 0 4.77 1.52v-3.4a4.84 4.84 0 0 1-1-.4z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__col-title">Thực đơn</div>
+          <ul role="list">
+            <li><a href="#menu">Cà Phê Phin</a></li>
+            <li><a href="#menu">Espresso & Latte</a></li>
+            <li><a href="#menu">Trà & Thức Uống</a></li>
+            <li><a href="#menu">Bánh Ngọt</a></li>
+            <li><a href="#menu">Thực Đơn Theo Mùa</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__col-title">Về chúng tôi</div>
+          <ul role="list">
+            <li><a href="#about">Câu Chuyện</a></li>
+            <li><a href="#atmosphere">Không Gian</a></li>
+            <li><a href="#visit">Địa Chỉ & Giờ Mở</a></li>
+            <li><a href="#">Tuyển Dụng</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <div class="footer__col-title">Liên hệ</div>
+          <ul role="list">
+            <li><a href="tel:+84901234567">0901 234 567</a></li>
+            <li><a href="mailto:hello@gonhocafe.vn">hello@gonhocafe.vn</a></li>
+            <li><a href="#">Đặt Bàn</a></li>
+            <li><a href="#">Gửi Phản Hồi</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <span>© 2024 Góc Nhỏ Cà Phê. Mọi quyền được bảo lưu.</span>
+        <span>Làm với ♥ tại Sài Gòn</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Mobile menu toggle
+    const burger = document.getElementById('nav-burger');
+    const navLinks = document.getElementById('nav-links');
+    burger.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      burger.setAttribute('aria-expanded', isOpen);
+      burger.setAttribute('aria-label', isOpen ? 'Đóng menu' : 'Mở menu');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        burger.setAttribute('aria-label', 'Mở menu');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Menu tabs (visual only)
+    document.querySelectorAll('.menu__tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.menu__tab').forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+      });
+    });
+
+    // Scroll reveal
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
+
+</body>
+</html>
